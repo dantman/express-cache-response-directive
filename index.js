@@ -156,12 +156,12 @@ module.exports = function cacheResponseDirective() {
 				}
 
 				value = value.filter(function(val) {
-					return val === false;
+					return val !== false;
 				});
 
 				value.forEach(function(val) {
 					if ( typeof val === 'string' ) {
-						if ( tokenRegexp.text(val) ) {
+						if ( tokenRegexp.test(val) ) {
 							return;
 						}
 

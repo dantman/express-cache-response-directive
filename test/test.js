@@ -99,6 +99,24 @@ route('/pattern-and-opts', function() {
 	});
 });
 
+route('/public-with-private-header', function() {
+	this.cacheControl('public', {
+		'private': "X-Private"
+	});
+});
+
+route('/public-with-private-headers', function() {
+	this.cacheControl('public', {
+		'private': ["X-Private-1", "X-Private-2"]
+	});
+});
+
+route('/public-with-no-cache-header', function() {
+	this.cacheControl('public', {
+		noCache: "X-Uncached"
+	});
+});
+
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.json({
@@ -201,4 +219,17 @@ describe('res.cacheControl', function() {
 	describe('when passed "private" and mustRevalidate: true', function() {
 		requestShouldHaveCacheControl('/pattern-and-opts', "private, must-revalidate");
 	});
+
+	describe('when passed "public" and private: "X-Private"', function() {
+		requestShouldHaveCacheControl('/public-with-private-header', 'public, private="X-Private"');
+	});
+
+	describe('when passed "public" and private: ["X-Private-1", "X-Private-2"]', function() {
+		requestShouldHaveCacheControl('/public-with-private-headers', 'public, private="X-Private-1, X-Private-2"');
+	});
+
+	describe('when passed "public" and no-cache: "X-Uncached"', function() {
+		requestShouldHaveCacheControl('/public-with-no-cache-header', 'public, no-cache="X-Uncached"');
+	});
+
 });
