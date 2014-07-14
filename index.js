@@ -1,6 +1,7 @@
 "use strict";
 var debug = require('debug')('express-cache-response-directive'),
 	util = require('util'),
+	Qty = require('js-quantities'),
 	// Cache-Control header name
 	cacheControlHeader = 'Cache-Control',
 	// Regexp matching HTTP/1.1 tokens
@@ -127,11 +128,14 @@ module.exports = function cacheResponseDirective() {
 		var directives = [];
 
 		validDirectives.forEach(function(directiveName) {
+			// jshint newcap: false
 			if ( !opts.hasOwnProperty(directiveName) ) {
 				return;
 			}
 
-			var value = opts[directiveName];
+			var value = opts[directiveName],
+				m,
+				qty;
 
 			if ( !value ) {
 				return;
@@ -139,11 +143,34 @@ module.exports = function cacheResponseDirective() {
 
 			if ( deltaDirectives.indexOf(directiveName) !== -1 ) {
 				if ( typeof value === 'string' ) {
-					throw new Error(util.format("cacheControl: String value support for the %s delta directive is not implemented.", directiveName));
-				} else if ( typeof value === 'number' ) {
+					if ( m = /^(\d+)\s*(s|sec|seconds?)$/i.exec(value) ) {
+						qty = Qty(parseInt(m[1], 10) + ' seconds');
+					} else if ( m = /^(\d+)\s*(min|minutes?)$/i.exec(value) ) {
+						qty = Qty(parseInt(m[1], 10) + ' minutes');
+					} else if ( m = /^(\d+)\s*(h|hours?)$/i.exec(value) ) {
+						qty = Qty(parseInt(m[1], 10) + ' hours');
+					} else if ( m = /^(\d+)\s*(d|days?)$/i.exec(value) ) {
+						qty = Qty(parseInt(m[1], 10) + ' days');
+					} else if ( m = /^(\d+)\s*(w|wk|weeks?)$/i.exec(value) ) {
+						qty = Qty(parseInt(m[1], 10) + ' weeks');
+					} else if ( m = /^(\d+)\s*(months?)$/i.exec(value) ) {
+						var months = parseInt(m[1], 10),
+							days = months * 30;
+						debug('treating %s month(s) as %s days for %s', months, days, directiveName);
+						qty = Qty(days + ' days');
+					} else if ( m = /^(\d+)\s*(y|years?)$/i.exec(value) ) {
+						qty = Qty(parseInt(m[1], 10) + ' years');
+					} else {
+						throw new Error(util.format("cacheControl: Invalid time string `%s` for the %s delta directive.", value, directiveName));
+					}
+
+					value = Math.round(qty.to('seconds').scalar);
+				}
+
+				if ( typeof value === 'number' ) {
 					directives.push(directiveName + '=' + value);
 				} else {
-					throw new Error(util.format("cacheControl: Invalid value `%s` for the %s delta directive."));
+					throw new Error(util.format("cacheControl: Invalid value `%s` for the %s delta directive.", value, directiveName));
 				}
 			} else if ( optionalFieldDirectives.indexOf(directiveName) !== -1 ) {
 				if ( value === true ) {
@@ -165,10 +192,10 @@ module.exports = function cacheResponseDirective() {
 							return;
 						}
 
-						throw new Error(util.format("cacheControl: Invalid token \"%s\" for the %s field directive.", directiveName));
+						throw new Error(util.format("cacheControl: Invalid token \"%s\" for the %s field directive.", val, directiveName));
 					}
 
-					throw new Error(util.format("cacheControl: Invalid value `%s` for the %s field directive.", directiveName));
+					throw new Error(util.format("cacheControl: Invalid value `%s` for the %s field directive.", val, directiveName));
 				});
 
 				if ( value.length ) {
