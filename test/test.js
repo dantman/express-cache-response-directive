@@ -17,6 +17,12 @@ function route(path, cb) {
 	});
 }
 
+route('/public-obj', function() {
+	this.cacheControl({
+		'public': true
+	});
+});
+
 route('/private-obj', function() {
 	this.cacheControl({
 		'private': true
@@ -147,6 +153,10 @@ describe('res.cacheControl', function() {
 				});
 		});
 	}
+
+	describe('when passed public: true', function() {
+		requestShouldHaveCacheControl('/public-obj', "public");
+	});
 
 	describe('when passed private: true', function() {
 		requestShouldHaveCacheControl('/private-obj', "private");
