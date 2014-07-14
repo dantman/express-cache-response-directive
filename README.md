@@ -3,6 +3,7 @@
   [![NPM version](https://badge.fury.io/js/express-cache-response-directive.svg)](http://badge.fury.io/js/express-cache-response-directive)
   [![Build Status](https://travis-ci.org/dantman/express-cache-response-directive.svg?branch=develop)](https://travis-ci.org/dantman/express-cache-response-directive)
   [![Coverage Status](https://coveralls.io/repos/dantman/express-cache-response-directive/badge.png?branch=develop)](https://coveralls.io/r/dantman/express-cache-response-directive?branch=develop)
+  [![dependencies](https://david-dm.org/dantman/express-cache-response-directive/status.svg)](https://david-dm.org/dantman/express-cache-response-directive)
   [![devDependencies](https://david-dm.org/dantman/express-cache-response-directive/dev-status.svg)](https://david-dm.org/dantman/express-cache-response-directive#info=devDependencies)
 
 Middleware for ExpressJS that defines a `cacheControl` method to set `Cache-Control` headers.
