@@ -27,8 +27,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "debug": "^1.0.3",
-    "on-headers": "0.0.0"
+    "debug": "^1.0.3"
   },
   "devDependencies": {
     "chai": "^1.9.1",
