@@ -1,0 +1,40 @@
+{
+  "name": "express-cache-response-directive",
+  "version": "0.0.0",
+  "license": "MIT",
+  "description": "ExpressJS middleware that gives Response objects an intuitive .cacheControl method to set Cache-Control headers.",
+  "keywords": [
+    "expressjs",
+    "middleware",
+    "expires",
+    "cache control"
+  ],
+  "author": {
+    "name": "Daniel Friesen",
+    "url": "http://danielfriesen.name",
+    "email": "daniel@nadir-seen-fire.com"
+  },
+  "homepage": "https://github.com/dantman/express-cache-response-directive",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dantman/express-cache-response-directive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dantman/express-cache-response-directive/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "debug": "^1.0.3",
+    "on-headers": "0.0.0"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "express": "^4.6.1",
+    "mocha": "^1.20.1",
+    "mocha-jshint": "0.0.7",
+    "supertest": "^0.13.0"
+  }
+}
