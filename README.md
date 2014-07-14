@@ -2,6 +2,7 @@
 
 Middleware for ExpressJS that defines a `cacheControl` method to set `Cache-Control` headers.
 
+This middleware doesn't define legacy Expires headers. For compatibility with old HTTP/1.0 agents combine it with [express-legacy-expires](https://github.com/dantman/express-legacy-expires).
 
 ## Install
 
