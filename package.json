@@ -1,6 +1,6 @@
 {
   "name": "express-cache-response-directive",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "ExpressJS middleware that gives Response objects an intuitive .cacheControl method to set Cache-Control headers.",
   "keywords": [
@@ -28,7 +28,8 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "debug": "^1.0.3"
+    "debug": "^1.0.3",
+    "js-quantities": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",

@@ -43,6 +43,72 @@ route('/max-age-alt', function() {
 	});
 });
 
+route('/max-age-300s', function() {
+	this.cacheControl({
+		maxAge: '300s'
+	});
+});
+
+route('/max-age-300-s', function() {
+	this.cacheControl({
+		maxAge: '300 s'
+	});
+});
+
+route('/max-age-300-s', function() {
+	this.cacheControl({
+		maxAge: '300 seconds'
+	});
+});
+
+route('/max-age-5minutes', function() {
+	this.cacheControl({
+		maxAge: '5 minutes'
+	});
+});
+
+route('/max-age-5min', function() {
+	this.cacheControl({
+		maxAge: '5 min'
+	});
+});
+
+route('/max-age-1hour', function() {
+	this.cacheControl({
+		maxAge: '1 hour'
+	});
+});
+
+route('/max-age-1h', function() {
+	this.cacheControl({
+		maxAge: '1h'
+	});
+});
+
+route('/max-age-3day', function() {
+	this.cacheControl({
+		maxAge: '3 days'
+	});
+});
+
+route('/max-age-1week', function() {
+	this.cacheControl({
+		maxAge: '1 week'
+	});
+});
+
+route('/max-age-1month', function() {
+	this.cacheControl({
+		maxAge: '1 month'
+	});
+});
+
+route('/max-age-1year', function() {
+	this.cacheControl({
+		maxAge: '1 year'
+	});
+});
+
 route('/no-transform', function() {
 	this.cacheControl({
 		noTransform: true
@@ -168,6 +234,50 @@ describe('res.cacheControl', function() {
 
 	describe('when passed private: true, maxAge: 300', function() {
 		requestShouldHaveCacheControl('/max-age-alt', "private, max-age=300");
+	});
+
+	describe('when passed maxAge: "300s"', function() {
+		requestShouldHaveCacheControl('/max-age-300s', 'public, max-age=300');
+	});
+
+	describe('when passed maxAge: "300 s"', function() {
+		requestShouldHaveCacheControl('/max-age-300-s', 'public, max-age=300');
+	});
+
+	describe('when passed maxAge: "300 seconds"', function() {
+		requestShouldHaveCacheControl('/max-age-300-s', 'public, max-age=300');
+	});
+
+	describe('when passed maxAge: "5 minutes"', function() {
+		requestShouldHaveCacheControl('/max-age-5minutes', 'public, max-age=300');
+	});
+
+	describe('when passed maxAge: "5 min"', function() {
+		requestShouldHaveCacheControl('/max-age-5min', 'public, max-age=300');
+	});
+
+	describe('when passed maxAge: "1 hour"', function() {
+		requestShouldHaveCacheControl('/max-age-1hour', 'public, max-age=3600');
+	});
+
+	describe('when passed maxAge: "1h"', function() {
+		requestShouldHaveCacheControl('/max-age-1h', 'public, max-age=3600');
+	});
+
+	describe('when passed maxAge: "3 days"', function() {
+		requestShouldHaveCacheControl('/max-age-3day', 'public, max-age=259200');
+	});
+
+	describe('when passed maxAge: "1 week"', function() {
+		requestShouldHaveCacheControl('/max-age-1week', 'public, max-age=604800');
+	});
+
+	describe('when passed maxAge: "1 month"', function() {
+		requestShouldHaveCacheControl('/max-age-1month', 'public, max-age=2592000');
+	});
+
+	describe('when passed maxAge: "1 year"', function() {
+		requestShouldHaveCacheControl('/max-age-1year', 'public, max-age=31556926');
 	});
 
 	describe('when passed noTransform: true', function() {
