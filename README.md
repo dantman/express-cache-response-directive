@@ -41,7 +41,7 @@ See the [HTTP/1.1 Standard's Cache-Control sections](http://www.w3.org/Protocols
 
 #### Patterns
 
-String patterns are defined for simple directives so you can simply write `res.cacheControl("public");` instead of having to always write `res.cacheControl({'public': true});`. Properties can be combined with options `res.cacheControl("public", {mustRevalidate: true});`.
+String patterns are defined for simple directives so you can simply write `res.cacheControl("public");` instead of having to always write `res.cacheControl({'public': true});`. Patterns can be combined with options `res.cacheControl("public", {mustRevalidate: true});`.
 
 ##### "public"
 
@@ -75,6 +75,7 @@ res.cacheControl("no-store");
 
 Each Cache-Control response directive defined in HTTP/1.1 has an option that can be defined.
   - Options for directives that use a delta time accept a number as a value.
+    - Time values may also be expressed as strings like "3 min", "1h", "5 days".
   - Options that optionally accept field names accept `true` for the normal non-field directive and for the with field-name directive accept either a string or an array of strings for the field names.
   - The remaining directives that don't have a value simply accept a truthy value.
 
@@ -130,13 +131,14 @@ res.cacheControl({noStore: true});
 // Cache-Control: no-cache, no-store
 ```
 
-  - `no-store` also implies `no-cache` because some browsers have begone treating no-cache the same way they treat no-store.
+  - `no-store` also implies `no-cache` because some browsers have begun treating no-cache the same way they treat no-store.
 
 ##### max-age:
 
 ```js
 res.cacheControl({'max-age': 300});
 res.cacheControl({maxAge: 300});
+res.cacheControl({maxAge: "5min"});
 // Cache-Control: public, max-age=300
 ```
 
