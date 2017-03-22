@@ -134,39 +134,39 @@ route('/s-maxage-3', function() {
 });
 
 route('/staleWhileRevalidate-1', function() {
-    this.cacheControl({
-        'stale-while-revalidate': 600
-    });
+	this.cacheControl({
+		'stale-while-revalidate': 600
+	});
 });
 
 route('/staleWhileRevalidate-2', function() {
-    this.cacheControl({
-        staleWhileRevalidate: 600
-    });
+	this.cacheControl({
+		staleWhileRevalidate: 600
+	});
 });
 
 route('/staleWhileRevalidate-1h', function() {
-    this.cacheControl({
-        staleWhileRevalidate: '1h'
-    });
+	this.cacheControl({
+		staleWhileRevalidate: '1h'
+	});
 });
 
 route('/staleIfError-1', function() {
-    this.cacheControl({
-        'stale-if-error': 600
-    });
+	this.cacheControl({
+		'stale-if-error': 600
+	});
 });
 
 route('/staleIfError-2', function() {
-    this.cacheControl({
-        staleIfError: 600
-    });
+	this.cacheControl({
+		staleIfError: 600
+	});
 });
 
 route('/staleIfError-1h', function() {
-    this.cacheControl({
-        staleIfError: '1h'
-    });
+	this.cacheControl({
+		staleIfError: '1h'
+	});
 });
 
 route('/must-revalidate', function() {
@@ -332,29 +332,29 @@ describe('res.cacheControl', function() {
 		requestShouldHaveCacheControl('/s-maxage-3', "s-maxage=600");
 	});
 
-    describe('when passed staleWhileRevalidate: 600', function() {
-        requestShouldHaveCacheControl('/staleWhileRevalidate-1', "stale-while-revalidate=600");
-    });
+	describe('when passed staleWhileRevalidate: 600', function() {
+		requestShouldHaveCacheControl('/staleWhileRevalidate-1', "stale-while-revalidate=600");
+	});
 
-    describe('when passed stale-while-revalidate: 600', function() {
-        requestShouldHaveCacheControl('/staleWhileRevalidate-2', "stale-while-revalidate=600");
-    });
+	describe('when passed stale-while-revalidate: 600', function() {
+		requestShouldHaveCacheControl('/staleWhileRevalidate-2', "stale-while-revalidate=600");
+	});
 
-    describe('when passed stale-while-revalidate: 1h', function() {
-        requestShouldHaveCacheControl('/staleWhileRevalidate-1h', "stale-while-revalidate=3600");
-    });
+	describe('when passed stale-while-revalidate: 1h', function() {
+		requestShouldHaveCacheControl('/staleWhileRevalidate-1h', "stale-while-revalidate=3600");
+	});
 
-    describe('when passed stale-if-error: 600', function() {
-        requestShouldHaveCacheControl('/staleIfError-1', "stale-if-error=600");
-    });
+	describe('when passed stale-if-error: 600', function() {
+		requestShouldHaveCacheControl('/staleIfError-1', "stale-if-error=600");
+	});
 
-    describe('when passed staleIfError: 600', function() {
-        requestShouldHaveCacheControl('/staleIfError-2', "stale-if-error=600");
-    });
+	describe('when passed staleIfError: 600', function() {
+		requestShouldHaveCacheControl('/staleIfError-2', "stale-if-error=600");
+	});
 
-    describe('when passed staleIfError: 1h', function() {
-        requestShouldHaveCacheControl('/staleIfError-1h', "stale-if-error=3600");
-    });
+	describe('when passed staleIfError: 1h', function() {
+		requestShouldHaveCacheControl('/staleIfError-1h', "stale-if-error=3600");
+	});
 
 	describe('when passed mustRevalidate: true', function() {
 		requestShouldHaveCacheControl('/must-revalidate', "must-revalidate");
