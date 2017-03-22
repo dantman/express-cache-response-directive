@@ -1,6 +1,6 @@
 {
   "name": "express-cache-response-directive",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "ExpressJS middleware that gives Response objects an intuitive .cacheControl method to set Cache-Control headers.",
   "keywords": [
