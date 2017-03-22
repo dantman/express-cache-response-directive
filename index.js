@@ -16,7 +16,9 @@ var debug = require('debug')('express-cache-response-directive'),
 		's-maxage',
 		'must-revalidate',
 		'proxy-revalidate',
-		'no-transform'
+		'no-transform',
+		'stale-while-revalidate',
+		'stale-if-error'
 	],
 	// Directives with an optional field-name value
 	optionalFieldDirectives = [
@@ -26,7 +28,9 @@ var debug = require('debug')('express-cache-response-directive'),
 	// Directives that use a number of seconds as a value
 	deltaDirectives = [
 		'max-age',
-		's-maxage'
+		's-maxage',
+		'stale-while-revalidate',
+		'stale-if-error'
 	],
 	// Map of camel-cased option keys to the corresponding Cache-Control directives
 	keyMap = {
@@ -37,7 +41,9 @@ var debug = require('debug')('express-cache-response-directive'),
 		proxyRevalidate: 'proxy-revalidate',
 		maxAge: 'max-age',
 		sMaxage: 's-maxage',
-		sMaxAge: 's-maxage'
+		sMaxAge: 's-maxage',
+		staleWhileRevalidate: 'stale-while-revalidate',
+		staleIfError: 'stale-if-error'
 	},
 	// Default values for string patterns
 	patternDefaults = {
